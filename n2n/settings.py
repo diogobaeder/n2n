@@ -130,4 +130,4 @@ class DisableMigrations(object):
         return None
 
 
-MIGRATION_MODULES = DisableMigrations()
+#MIGRATION_MODULES = DisableMigrations()
