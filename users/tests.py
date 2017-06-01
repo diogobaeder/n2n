@@ -26,6 +26,13 @@ class UserTest(TestCase):
 
         self.assertEqual(user.company.name, 'Acme')
 
+    def test_gets_by_uuid(self):
+        user = User.objects.create(name='John')
+
+        retrieved = User.objects.get_by_uuid(user.uuid)
+
+        self.assertEqual(retrieved.id, user.id)
+
 
 class CompanyTest(TestCase):
     def test_creates_basic_company(self):
@@ -33,6 +40,13 @@ class CompanyTest(TestCase):
 
         self.assertEqual(company.name, 'Acme')
         self.assertIsInstance(company.uuid, UUID)
+
+    def test_gets_by_uuid(self):
+        company = Company.objects.create(name='Acme')
+
+        retrieved = Company.objects.get_by_uuid(company.uuid)
+
+        self.assertEqual(retrieved.id, company.id)
 
 
 class ProjectTest(TestCase):

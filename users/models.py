@@ -11,14 +11,21 @@ class IdentifiableModel(models.Model):
         abstract = True
 
 
+class IdentifiableManager(models.Manager):
+    def get_by_uuid(self, uuid):
+        return self.get(uuid=uuid)
+
+
 class Company(IdentifiableModel):
-    pass
+    objects = IdentifiableManager()
 
 
 class Project(IdentifiableModel):
-    pass
+    objects = IdentifiableManager()
 
 
 class User(IdentifiableModel):
     company = models.ForeignKey(Company, related_name='users', null=True)
     projects = models.ManyToManyField(Project, related_name='users')
+
+    objects = IdentifiableManager()
